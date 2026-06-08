@@ -1,0 +1,1802 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Raef Abdallah</title>
+    <meta name="description" content="Raef Abdallah — Ph.D. in Computer Science. Transportation safety, optimization, and data-driven decision support." />
+
+    <!-- Optional: modern, professional font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+                :root {
+                    --bg-rgb: 242, 244, 247; /* light professional grey */
+                    --panel: #ffffff;
+                    conta --text: #111111;
+                    --muted: rgba(17,17,17,.68);
+                    --muted2: rgba(17,17,17,.55);
+                    --line: rgba(17,17,17,.12);
+                    --shadow: 0 12px 30px rgba(0,0,0,.06);
+                    --accent: #2C6BED;
+                    --radius: 16px;
+                    --maxw: 1040px;
+                    --pad: 22px;
+                }
+
+                    /* Dark theme */
+                    :root[data-theme="dark"] {
+                        --bg: #0b0f17;
+                        --panel: #111827;
+                        --text: #e5e7eb;
+                        --muted: rgba(229,231,235,.72);
+                        --muted2: rgba(229,231,235,.55);
+                        --line: rgba(229,231,235,.14);
+                        --shadow: 0 12px 30px rgba(0,0,0,.45);
+                        --accent: #66a3ff;
+                    }
+
+
+                * {
+                    box-sizing: border-box;
+                }
+
+                html {
+                    scroll-behavior: smooth;
+                }
+
+                html, body {
+                    margin: 0;
+                    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+                    background: var(--bg);
+                    color: var(--text);
+                    line-height: 1.6;
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                }
+
+                a {
+                    color: inherit;
+                    text-decoration: none;
+                }
+
+                    a.link {
+                        color: var(--accent);
+                        text-decoration: underline;
+                        text-decoration-thickness: 1px;
+                        text-underline-offset: 3px;
+                    }
+
+                        a.link:hover {
+                            opacity: .9;
+                        }
+
+                /* Layout */
+                .container {
+                    max-width: var(--maxw);
+                    margin: 0 auto;
+                    padding: 0 18px;
+                }
+
+                /* Top bar */
+                .topbar {
+                    position: sticky;
+                    top: 0;
+                    z-index: 999;
+                    background: color-mix(in srgb, var(--bg) 86%, transparent);
+                    backdrop-filter: blur(10px);
+                    border-bottom: 1px solid var(--line);
+                }
+
+                .topbar-inner {
+                    height: 64px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 14px;
+                }
+
+                .brand {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    font-weight: 700;
+                    letter-spacing: .2px;
+                    white-space: nowrap;
+                }
+
+                .brand-dot {
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 999px;
+                    background: var(--accent);
+                    box-shadow: 0 0 0 3px rgba(44,107,237,.15);
+                    flex: 0 0 auto;
+                }
+
+                .nav {
+                    position: relative; /* important for absolute indicator */
+                    display: flex;
+                    align-items: center;
+                    gap: 14px;
+                }
+
+
+                    .nav a {
+                        font-size: 14px;
+                        padding: 10px 10px;
+                        border-radius: 10px;
+                        color: var(--muted);
+                        font-weight: 600;
+                    }
+
+                        .nav a:hover {
+                            background: rgba(17,17,17,.06);
+                            color: var(--text);
+                        }
+
+                        .nav a.active {
+                            background: rgba(44,107,237,.10);
+                            color: var(--accent);
+                        }
+
+                .nav-actions {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                }
+
+                .icon-btn {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 12px;
+                    border: 1px solid var(--line);
+                    background: var(--panel);
+                    box-shadow: 0 8px 18px rgba(0,0,0,.05);
+                    display: grid;
+                    place-items: center;
+                    transition: transform .15s ease, box-shadow .15s ease;
+                }
+
+                /* continuous subtle glow */
+                .theme-hint {
+                    animation: themeBreath 5s ease-in-out infinite;
+                }
+
+                @keyframes themeBreath {
+                    0%,100% {
+                        box-shadow: 0 0 0 0 rgba(201,162,0,0);
+                    }
+
+                    50% {
+                        box-shadow: 0 0 0 4px rgba(201,162,0,.30);
+                    }
+                }
+
+                /* tint icon with same accent */
+                .theme-hint svg {
+                    color: var(--accent);
+                }
+
+                .icon-btn:hover {
+                    transform: translateY(-1px);
+                    box-shadow: 0 12px 24px rgba(0,0,0,.08);
+                }
+
+                .icon {
+                    width: 18px;
+                    height: 18px;
+                    opacity: 1; /* full contrast */
+                }
+
+
+                #themeToggle:hover .icon {
+                    transform: scale(1.1);
+                }
+
+                /* Light mode */
+                #themeToggle {
+                    color: #111; /* dark icon */
+                }
+
+                /* Dark mode */
+                :root[data-theme="dark"] #themeToggle {
+                    color: #f9fafb; /* bright icon */
+                }
+
+
+
+                /* Mobile nav */
+                .hamburger {
+                    display: none;
+                    border: 1px solid var(--line);
+                    background: var(--panel);
+                    border-radius: 12px;
+                    height: 40px;
+                    padding: 0 12px;
+                    font-weight: 700;
+                    cursor: pointer;
+                }
+
+                .mobile-menu {
+                    display: none;
+                    border-top: 1px solid var(--line);
+                    padding: 10px 0 14px;
+                }
+
+                    .mobile-menu a {
+                        display: block;
+                        padding: 12px 10px;
+                        border-radius: 12px;
+                        color: var(--muted);
+                        font-weight: 600;
+                    }
+
+                        .mobile-menu a:hover {
+                            background: rgba(17,17,17,.06);
+                            color: var(--text);
+                        }
+
+                        .mobile-menu a.active {
+                            background: rgba(44,107,237,.10);
+                            color: var(--accent);
+                        }
+
+                /* Sections */
+                section {
+                    padding: 30px 0;
+                }
+
+                .section-title {
+                    font-size: 22px;
+                    margin: 0 0 8px 0;
+                    letter-spacing: .2px;
+                }
+
+                .section-subtitle {
+                    margin: 0 0 18px 0;
+                    color: var(--muted);
+                    max-width: 72ch;
+                    margin-bottom: 12px;
+                }
+
+                /* Hero */
+                .hero {
+                    padding: 54px 0 26px;
+                }
+
+                .hero-grid {
+                    display: grid;
+                    grid-template-columns: 1.35fr .85fr;
+                    gap: 18px;
+                    align-items: stretch;
+                }
+
+                .card {
+                    background: var(--panel);
+                    border: 1px solid var(--line);
+                    border-radius: var(--radius);
+                    box-shadow: var(--shadow);
+                    padding: var(--pad);
+                }
+
+                .hero h1 {
+                    font-size: 42px;
+                    line-height: 1.12;
+                    margin: 0 0 10px 0;
+                    letter-spacing: -.4px;
+                }
+
+                .hero .tagline {
+                    font-size: 16px;
+                    font-weight: 600;
+                    color: var(--muted);
+                    margin: 0 0 14px 0;
+                }
+
+                .hero .summary {
+                    margin: 0 0 16px 0;
+                    color: var(--muted);
+                    max-width: 70ch;
+                }
+
+                .pill-row {
+                    display: flex;
+                    gap: 10px;
+                    flex-wrap: wrap;
+                    margin-top: 8px;
+                }
+
+                .pill {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 6px;
+                    font-size: 12px;
+                    font-weight: 600;
+                    border-radius: 999px;
+                    padding: 7px 10px;
+                }
+
+                .pill-icon-img {
+                    width: 16px; /* controls icon size */
+                    height: 16px;
+                    object-fit: contain;
+                    flex-shrink: 0;
+                }
+
+
+                /* theme-aware */
+                color: var(--text);
+                border: 1px solid var(--line);
+                background: var(--panel);
+                }
+
+                :root[data-theme="dark"] .pill {
+                    background: #1f2937; /* darker chip */
+                    color: #e5e7eb; /* bright readable text */
+                    border-color: rgba(255,255,255,.15);
+                }
+
+                /* when dark theme is active */
+                [data-theme="dark"] .pill-icon-img {
+                    filter: invert(1);
+                }
+
+                .btn-row {
+                    display: flex;
+                    gap: 10px;
+                    flex-wrap: wrap;
+                    margin-top: 16px;
+                }
+
+                .btn {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 10px;
+                    padding: 11px 14px;
+                    border-radius: 12px;
+                    border: 1px solid var(--line);
+                    background: var(--panel);
+                    font-weight: 700;
+                    font-size: 14px;
+                    cursor: pointer;
+                    transition: transform .12s ease;
+                }
+
+                .btn-icon {
+                    height: 18px;
+                    width: auto;
+                    display: block;
+                }
+
+                .btn:hover {
+                    transform: translateY(-1px);
+                }
+
+                .btn.primary {
+                    background: var(--accent);
+                    border-color: rgba(44,107,237,.22);
+                    color: white;
+                    box-shadow: 0 16px 30px rgba(44,107,237,.20);
+                }
+
+                .btn .mini-icon {
+                    width: 16px;
+                    height: 16px;
+                }
+
+                .profile {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 14px;
+                    height: 100%;
+                }
+
+                .avatar {
+                    border-radius: 14px;
+                    overflow: hidden;
+                    border: 1px solid var(--line);
+                    background: #f0f0f0;
+                    aspect-ratio: 1 / 1;
+                    display: grid;
+                    place-items: center;
+                    color: var(--muted2);
+                    font-weight: 700;
+                    letter-spacing: .2px;
+                }
+
+                    .avatar img {
+                        width: 100%;
+                        height: 134%;
+                        object-fit: cover; /* prevents distortion */
+                    }
+
+                .profile small {
+                    color: var(--muted);
+                    display: block;
+                }
+
+                .kv {
+                    display: grid;
+                    gap: 10px;
+                }
+
+                    .kv .row {
+                        display: flex;
+                        justify-content: space-between;
+                        gap: 12px;
+                        padding-top: 10px;
+                        border-top: 1px dashed var(--line);
+                        color: var(--muted);
+                        font-size: 13px;
+                    }
+
+                        .kv .row strong {
+                            color: var(--text);
+                            font-weight: 700;
+                        }
+
+                /* Mobile fix only */
+                @media (max-width: 768px) {
+                    .kv .row strong {
+                        margin-left: auto;
+                        text-align: right;
+                        flex: 1;
+                        min-width: 0;
+                    }
+                }
+
+
+                /* Highlights */
+                .highlights {
+                    margin-top: 14px;
+                    display: grid;
+                    grid-template-columns: repeat(4,1fr);
+                    gap: 12px;
+                }
+
+                .stat {
+                    background: var(--panel);
+                    border: 1px solid var(--line);
+                    border-radius: 14px;
+                    padding: 14px;
+                    box-shadow: 0 10px 22px rgba(0,0,0,.05);
+                    min-height: 86px;
+                }
+
+                    .stat .num {
+                        font-size: 18px;
+                        font-weight: 800;
+                        letter-spacing: -.2px;
+                        margin-bottom: 4px;
+                    }
+
+                    .stat .lbl {
+                        color: var(--muted);
+                        font-weight: 600;
+                        font-size: 13px;
+                    }
+
+                /* Education + Teaching blocks */
+                .grid-2 {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 14px;
+                }
+
+                .item {
+                    padding: 14px 0;
+                    border-top: 1px solid var(--line);
+                }
+
+                    .item:first-child {
+                        border-top: none;
+                        padding-top: 0;
+                    }
+
+                    .item .title {
+                        font-weight: 800;
+                        margin: 0 0 4px 0;
+                        letter-spacing: .1px;
+                    }
+
+                    .item .meta {
+                        color: var(--muted);
+                        margin: 0 0 4px 0;
+                        font-weight: 600;
+                        font-size: 13px;
+                    }
+
+                    .item .desc {
+                        color: var(--muted);
+                        margin: 0;
+                        font-size: 14px;
+                    }
+
+                /* Publications */
+                .pub {
+                    padding: 14px 0;
+                    border-top: 1px solid var(--line);
+                }
+
+                    .pub:first-child {
+                        border-top: none;
+                        padding-top: 0;
+                    }
+
+                    .pub .ptitle {
+                        font-weight: 800;
+                        margin: 0 0 6px 0;
+                        letter-spacing: .1px;
+                    }
+
+                    .pub .pauth {
+                        margin: 0 0 6px 0;
+                        color: var(--muted);
+                        font-size: 14px;
+                    }
+
+                    .pub .pmeta {
+                        margin: 0 0 10px 0;
+                        color: var(--muted2);
+                        font-size: 13px;
+                        font-weight: 600;
+                    }
+
+                .chips {
+                    display: flex;
+                    gap: 8px;
+                    flex-wrap: wrap;
+                }
+
+                .chip {
+                    font-size: 12px;
+                    font-weight: 700;
+                    border-radius: 999px;
+                    border: 1px solid var(--line);
+                    padding: 7px 10px;
+                    background: rgba(17,17,17,.03);
+                    color: var(--text);
+                }
+
+                    .chip.accent {
+                        background: rgba(44,107,237,.12);
+                        border-color: rgba(44,107,237,.22);
+                        color: var(--accent);
+                    }
+
+                /* Contact */
+                .contact-grid {
+                    display: grid;
+                    grid-template-columns: 1.1fr .9fr;
+                    gap: 14px;
+                    align-items: start;
+                }
+
+                .contact-list {
+                    display: grid;
+                    gap: 10px;
+                }
+
+                .contact-link {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 12px;
+                    padding: 12px 14px;
+                    border-radius: 14px;
+                    border: 1px solid var(--line);
+                    background: var(--panel);
+                    box-shadow: 0 10px 22px rgba(0,0,0,.05);
+                    font-weight: 700;
+                }
+
+                    .contact-link span {
+                        color: var(--muted);
+                        font-weight: 600;
+                        font-size: 13px;
+                    }
+
+                    .contact-link:hover {
+                        transform: translateY(-1px);
+                    }
+
+                /* Light theme */
+                .hamburger {
+                    color: #111; /* dark icon */
+                    background: var(--panel);
+                }
+
+                /* Dark theme */
+                :root[data-theme="dark"] .hamburger {
+                    color: #ffffff; /* bright icon */
+                    background: #1f2937; /* slightly lighter than panel */
+                    border-color: rgba(255,255,255,.18);
+                }
+
+
+                /* Footer */
+                footer {
+                    padding: 26px 0 40px;
+                    color: var(--muted);
+                    font-size: 13px;
+                    border-top: 1px solid var(--line);
+                }
+
+                .footer-inner {
+                    display: flex;
+                    justify-content: space-between;
+                    gap: 12px;
+                    flex-wrap: wrap;
+                    align-items: center;
+                }
+
+                /* Responsive */
+                @media (max-width: 920px) {
+                    .hero-grid {
+                        grid-template-columns: 1fr;
+                    }
+
+                    .highlights {
+                        grid-template-columns: repeat(2,1fr);
+                    }
+
+                    .grid-2 {
+                        grid-template-columns: 1fr;
+                    }
+
+                    .contact-grid {
+                        grid-template-columns: 1fr;
+                    }
+                }
+
+                @media (max-width: 760px) {
+                    .nav {
+                        display: none;
+                    }
+
+                    .hamburger {
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 8px;
+                    }
+
+                    .nav-actions {
+                        gap: 8px;
+                    }
+
+                    section {
+                        padding: 54px 0;
+                    }
+
+                    .hero h1 {
+                        font-size: 34px;
+                    }
+                }
+
+                @media (max-width: 760px) {
+                    section {
+                        padding: 22px 0;
+                    }
+
+                    .card {
+                        padding: 16px;
+                    }
+
+                    .section-subtitle {
+                        margin-bottom: 10px;
+                    }
+
+                    .item,
+                    .pub {
+                        padding: 10px 0;
+                    }
+
+                    .hero {
+                        padding: 28px 0 18px;
+                    }
+                }
+
+                }
+
+
+
+                .pub-header {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0px;
+                    white-space: nowrap;
+                    flex-wrap: wrap; /* safe for mobile */
+                }
+
+                .scholar-link img {
+                    height: 50px; /* more professional size */
+                    width: auto;
+                    display: inline-block;
+                    vertical-align: middle; /* removes baseline issues */
+                }
+
+                .edu-degree {
+                    display: inline-flex;
+                    align-items: center;
+                }
+
+                .edu-logo-inline {
+                    height: 28px; /* subtle, professional */
+                    width: auto;
+                    display: block; /* avoids baseline issues */
+                }
+
+                .school {
+                    display: flex;
+                    align-items: center; /* vertical alignment */
+                    gap: 8px;
+                }
+
+                .school-logo {
+                    height: 30px; /* consistent size */
+                    width: 30px;
+                }
+
+                .venn-wrap {
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    margin: 18px 0;
+                }
+
+                    .venn-wrap svg {
+                        width: min(680px, 96vw);
+                        height: auto; /* IMPORTANT: prevents clipping */
+                        display: block;
+                        overflow: visible; /* extra safety */
+                    }
+
+                .sub-strong {
+                    font: 12px Arial, sans-serif;
+                    font-weight: bold;
+                    fill: "#111";
+                }
+
+                /* ===== CV Modal (theme-aware) ===== */
+                .cv-modal {
+                    position: fixed;
+                    inset: 0;
+                    background: rgba(0,0,0,.45);
+                    display: none;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 2000;
+                }
+
+                :root[data-theme="dark"] .cv-modal {
+                    background: rgba(0,0,0,.65); /* slightly darker overlay in dark mode */
+                }
+
+                .cv-modal.show {
+                    display: flex;
+                }
+
+                .cv-box {
+                    background: var(--panel); /* ✅ uses theme */
+                    color: var(--text); /* ✅ uses theme */
+                    border: 1px solid var(--line); /* ✅ uses theme */
+                    padding: 22px;
+                    border-radius: 14px;
+                    max-width: 420px;
+                    width: calc(100% - 32px);
+                    text-align: center;
+                    box-shadow: var(--shadow); /* ✅ uses theme */
+                }
+
+                    .cv-box h3 {
+                        margin: 0 0 8px 0;
+                        color: var(--text);
+                    }
+
+                    .cv-box p {
+                        margin: 0 0 16px 0;
+                        color: var(--muted); /* ✅ readable in both themes */
+                    }
+
+                    /* Make modal buttons look consistent */
+                    .cv-box .btn {
+                        justify-content: center;
+                        width: 100%;
+                        margin-top: 10px;
+                    }
+
+                /* Dark theme – make Close button white */
+                :root[data-theme="dark"] .cv-box .btn:not(.primary) {
+                    background: #ffffff;
+                    color: #111111;
+                    border-color: #ffffff;
+                }
+
+                /* default (light theme) */
+                .ocu-logo {
+                    content: url("ocu.png");
+                }
+
+                /* dark theme swap */
+                :root[data-theme="dark"] .ocu-logo {
+                    content: url("ocu-logo-blue.png");
+                }
+
+                /* default size */
+                .school-logo {
+                    height: 22px;
+                    width: auto;
+                }
+
+                /* dark theme → make ONLY OCU wider */
+                :root[data-theme="dark"] .ocu-logo {
+                    height: 26px; /* slightly taller */
+                    width: auto; /* keeps proportions */
+                }
+
+
+                /* Hover hint */
+                #headshotWrap {
+                    cursor: zoom-in;
+                }
+
+                /* ===== Headshot modal ===== */
+                .img-modal {
+                    position: fixed;
+                    inset: 0;
+                    display: none;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 3000;
+                    background: rgba(0,0,0,.55);
+                }
+
+                :root[data-theme="dark"] .img-modal {
+                    background: rgba(0,0,0,.7);
+                }
+
+                .img-modal.show {
+                    display: flex;
+                }
+
+                .img-modal-box {
+                    position: relative;
+                    width: min(92vw, 720px);
+                    max-height: 88vh;
+                    background: var(--panel);
+                    border: 1px solid var(--line);
+                    border-radius: 16px;
+                    box-shadow: var(--shadow);
+                    padding: 10px;
+                }
+
+                    .img-modal-box img {
+                        width: 100%;
+                        height: auto;
+                        max-height: calc(88vh - 20px);
+                        object-fit: contain;
+                        border-radius: 12px;
+                        display: block;
+                    }
+
+                .img-modal-close {
+                    position: absolute;
+                    top: 8px;
+                    right: 10px;
+                    width: 38px;
+                    height: 38px;
+                    border-radius: 12px;
+                    border: 1px solid var(--line);
+                    background: var(--panel);
+                    color: var(--text);
+                    font-size: 22px;
+                    line-height: 1;
+                    cursor: pointer;
+                }
+
+                :root[data-theme="dark"] .img-modal-close {
+                    background: #ffffff; /* high contrast close button */
+                    color: #111111;
+                    border-color: #ffffff;
+                }
+
+                /* Optional: desktop-only "pop" on hover (subtle) */
+                @media (hover:hover) {
+                    #headshotWrap:hover {
+                        transform: translateY(-2px);
+                        box-shadow: 0 18px 40px rgba(0,0,0,.18);
+                    }
+                }
+
+                /* container */
+                .hotspot-wrap {
+                    position: relative;
+                }
+
+                /* invisible clickable areas */
+                .hotspot {
+                    position: absolute;
+                    cursor: pointer;
+                }
+
+                /* invisible clickable areas */
+                .hotspot-left {
+                    position: absolute;
+                    cursor: pointer;
+                }
+
+                /* tooltip */
+                .hotspot::after {
+                    content: attr(data-name);
+                    position: absolute;
+                    bottom: 0%;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    margin-bottom: 8px;
+                    padding: 6px 10px;
+                    border-radius: 10px;
+                    font-size: 12px;
+                    font-weight: 700;
+                    background: var(--panel);
+                    color: var(--text);
+                    border: 1px solid var(--line);
+                    box-shadow: var(--shadow);
+                    opacity: 0;
+                    white-space: nowrap;
+                    transition: opacity .15s ease;
+                }
+
+                .hotspot-left::after {
+                    content: attr(data-name);
+                    position: absolute;
+                    right: 10%; /* anchor to left side */
+                    top: 20%;
+                    transform: translateY(-50%);
+                    margin-right: 10px; /* spacing from dog */
+
+                    padding: 6px 10px;
+                    border-radius: 10px;
+                    font-size: 12px;
+                    font-weight: 700;
+                    background: var(--panel);
+                    color: var(--text);
+                    border: 1px solid var(--line);
+                    box-shadow: var(--shadow);
+                    opacity: 0;
+                    white-space: nowrap;
+                    pointer-events: none;
+                    transition: opacity .15s ease;
+                }
+
+
+                .patent-status {
+                    display: inline-block;
+                    background: #facc15;
+                    color: #111827;
+                    padding: 6px 12px;
+                    border-radius: 8px;
+                    font-weight: 600;
+                    margin-top: 10px;
+                }
+
+                /* show tooltip */
+                @media (hover:hover) {
+                    .hotspot:hover::after,
+                    .hotspot-left:hover::after {
+                        opacity: 1;
+                    }
+                }
+
+                .patent-link {
+                    color: var(--text);
+                    text-decoration: none;
+                    transition: color 0.2s ease;
+                    cursor: pointer;
+                }
+
+                    .patent-link:hover {
+                        color: var(--accent);
+                        text-decoration: underline;
+                    }
+
+
+                /*
+        .hotspot-left{
+          outline: 2px dashed red;
+        }
+
+        .hotspot{
+          outline: 2px dashed red;
+        }
+        */
+
+
+    </style>
+</head>
+
+<!-- CV Modal -->
+<div class="cv-modal" id="cvModal">
+    <div class="cv-box">
+        <h3>Request Full CV</h3>
+        <p>
+            Please email me to request the most recent version of my CV.
+        </p>
+
+        <a href="mailto:raef@wayne.edu?cc=Raef@raef.io&subject=CV Request"
+           class="btn primary">
+            Email Raef
+        </a>
+
+        <button class="btn" id="cvClose">Close</button>
+    </div>
+</div>
+
+
+<body>
+    <!-- TOP BAR -->
+    <header class="topbar">
+        <div class="container">
+            <div class="topbar-inner">
+                <a class="brand" href="#about" aria-label="Go to About">
+                    <!--   <img src="Raef_Avatar1.png"
+                    alt="Avatar"
+                    style="height:44px; width:auto; margin-top:-20px;"> -->
+                    <span class="brand-dot"></span>
+
+                    <span>Raef Abdallah</span>
+                </a>
+
+                <nav class="nav" aria-label="Primary">
+                    <a href="#about" data-nav="about" class="active">About</a>
+                    <a href="#education" data-nav="education">Education</a>
+                    <a href="#teaching" data-nav="teaching">Teaching</a>
+                    <a href="#publications" data-nav="publications">Publications</a>
+                    <a href="#patents" data-nav="patents">Patents</a>
+                    <a href="#contact" data-nav="contact">Contact</a>
+
+                    <span class="nav-indicator" id="navIndicator" aria-hidden="true"></span>
+                </nav>
+
+                <div class="nav-actions">
+                    <!-- Replace # links with your real profiles -->
+                    <a class="icon-btn" href="https://scholar.google.com/citations?user=zvGDhgMAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar">
+                        <!-- simple graduation cap icon -->
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M12 3 1 9l11 6 9-4.91V17h2V9L12 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                            <path d="M5 11v6c0 2 3 4 7 4s7-2 7-4v-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                    </a>
+                    <a class="icon-btn" href="https://www.linkedin.com/in/raef-a-3955971/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M6.5 9.5V20H3V9.5h3.5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                            <path d="M4.75 7.25a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" stroke="currentColor" stroke-width="2" />
+                            <path d="M10 20V9.5h3.3v1.6c.7-1.2 2-2 3.8-2 3 0 4.9 2 4.9 5.7V20h-3.5v-4.7c0-2-.8-3.2-2.4-3.2-1.8 0-2.6 1.3-2.6 3.2V20H10Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                        </svg>
+                    </a>
+
+                    <button class="icon-btn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
+
+                        <!-- Moon (light mode icon) -->
+                        <svg id="moonIcon" class="icon" viewBox="0 0 24 24" fill="none">
+                            <path d="M21 13.2A8.5 8.5 0 0 1 10.8 3a7 7 0 1 0 10.2 10.2Z"
+                                  stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                        </svg>
+
+                        <!-- Sun (dark mode icon) -->
+                        <svg id="sunIcon" class="icon" viewBox="0 0 24 24" fill="none" style="display:none;">
+                            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" />
+                            <path stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                  d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4
+         M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+                        </svg>
+
+                    </button>
+
+
+
+                    <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="mobileMenu">
+                        Menu
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile menu -->
+            <div class="mobile-menu" id="mobileMenu" aria-label="Mobile">
+                <a href="#about" data-nav="about" class="active">About</a>
+                <a href="#education" data-nav="education">Education</a>
+                <a href="#teaching" data-nav="teaching">Teaching</a>
+                <a href="#publications" data-nav="publications">Publications</a>
+                <a href="#patents" data-nav="patents">Patents</a>
+                <a href="#contact" data-nav="contact">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ABOUT -->
+        <section id="about" class="hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="card">
+                        <h1>Raef Abdallah, Ph.D.</h1>
+                        <p class="tagline"><span>&Sigma;&eta;&delta;&iota;&eta;&epsilon;&epsilon;&#x211D;</span> • Educator • Researcher • Computer Scientist </p>
+
+                        <p class="summary">
+
+                            <span style="color:var(--muted2); font-weight:600;"> I have extensive hands-on software engineering experience spanning manufacturing, automotive, aerospace, and education sectors. This combination of academic rigor and real-world practice has given me a deep understanding of the technical skills, problem-solving strategies, and professional competencies most valued in industry.</span>
+                        </p>
+
+                        <!-- <div class="pill-row" aria-label="Research focus">
+                           <span class="pill">Optimization</span>
+                           <span class="pill">Emergency Response</span>
+                           <span class="pill">Transportation Safety</span>
+                           <span class="pill">Machine Learning</span>
+                         </div>-->
+                        <div class="pill-row" aria-label="Research focus">
+
+                            <!-- Optimization -->
+                            <span class="pill">
+                                <img src="optimization.png" alt="Optimization" class="pill-icon-img">
+                                Optimization
+                            </span>
+
+                            <!-- Emergency -->
+                            <span class="pill">
+                                <img src="ambulance.png" alt="Emergency" class="pill-icon-img">
+                                Emergency
+                            </span>
+
+
+                            <!-- Safety / Transportation -->
+                            <span class="pill">
+                                <img src="road.png" alt="Safety" class="pill-icon-img">
+                                Safety
+                            </span>
+
+
+                            <!-- Machine Learning -->
+                            <span class="pill">
+                                <img src="ml.png" alt="ML" class="pill-icon-img">
+                                ML
+                            </span>
+
+                        </div>
+
+
+
+                        <div class="btn-row">
+                            <!-- Replace with your CV file path -->
+
+                            <button class="btn primary" id="cvBtn">Request CV</button>
+                            <!--<a class="btn primary" href="" target="_blank" rel="noopener noreferrer">
+
+
+                              <svg class="mini-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M12 3v10m0 0 4-4m-4 4-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                              </svg>
+                              Download CV
+                            </a>
+
+                            <a class="btn primary" href="" target="_blank" rel="noopener noreferrer">-->
+                            <!-- Replace with your email -->
+                            <a class="btn" href="mailto:raef@wayne.edu">
+                                <svg class="mini-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="2" />
+                                    <path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                                </svg>
+                                Email
+                            </a>
+
+                            <!-- Replace with your Scholar link -->
+                            <!-- <a class="btn" href="https://scholar.google.com/citations?user=zvGDhgMAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener noreferrer">
+                              Google Scholar
+                            </a>-->
+
+
+                            <a class="btn"
+                               href="https://scholar.google.com/citations?user=zvGDhgMAAAAJ&hl=en&oi=ao"
+                               target="_blank"
+                               rel="noopener noreferrer">
+
+                                <!--<img src="google_scholar.png"
+                                     alt="Google Scholar"
+                                     class="btn-icon">-->
+                                Google Scholar
+                            </a>
+                        </div>
+
+                        <div class="venn-wrap">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 700 620"
+                                 preserveAspectRatio="xMidYMid meet">
+
+                                <style>
+                                    #title-engineering {
+                                        font: 700 30px Arial, sans-serif;
+                                        fill: var(--text);
+                                    }
+
+                                    .title {
+                                        font: 700 16px Arial, sans-serif;
+                                        fill: var(--text);
+                                    }
+
+
+                                    .lbl {
+                                        font: 600 14px Arial, sans-serif;
+                                        fill: #222;
+                                    }
+
+                                    .sub {
+                                        font: 12px Arial, sans-serif;
+                                        fill: #222;
+                                    }
+                                </style>
+
+                                <!-- Title -->
+                                <text x="350" y="64" text-anchor="middle" id="title-engineering">
+                                    Education &amp; Engineering Experience
+                                </text>
+
+                                <!-- Outer circle -->
+                                <circle cx="350" cy="360" r="290"
+                                        fill="#f6f3ee" stroke="#a8a8a8" stroke-width="2" />
+
+
+                                <text x="350"
+                                      y="610"
+                                      text-anchor="middle"
+                                      font-size="16"
+                                      font-weight="700"
+                                      fill="#2f2f2f"
+                                      font-family="Arial, sans-serif">
+                                    Software Engineering
+                                </text>
+
+
+
+
+                                <!-- Center core -->
+                                <circle cx="350" cy="320" r="72"
+                                        fill="#7f8fa3"
+                                        opacity="0.55"
+                                        stroke="#5f6f83"
+                                        stroke-width="1.5" />
+
+
+                                <text x="350" y="310" text-anchor="middle" class="lbl">Integrated Research</text>
+                                <text x="350" y="332" text-anchor="middle" class="sub-strong">Safety decision support</text>
+                                <text x="350" y="352" text-anchor="middle" class="sub-strong">
+                                    dispatch • localization
+                                </text>
+                                <text x="350" y="370" text-anchor="middle" class="sub-strong">
+                                    road safety
+                                </text>
+
+                                <!-- Domain circles -->
+                                <!-- Algorithms & Systems (light red) --> road safety" opacity="0.38"/>
+
+                                <!-- AI & Machine Learning (light blue) -->
+                                <circle cx="215" cy="320" r="110" fill="#7da6c6" opacity="0.34" />
+
+                                <!-- Optimization & OR (light green) -->
+                                <circle cx="485" cy="320" r="110" fill="#86b59a" opacity="0.34" />
+
+                                <!-- Transportation Safety & Mobility (light yellow) -->
+                                <circle cx="350" cy="435" r="110" fill="#f3e3a3" opacity="0.38" />
+
+                                <!-- Labels -->
+                                <text x="350" y="188" text-anchor="middle" class="lbl">Algorithms</text>
+                                <text x="350" y="206" text-anchor="middle" class="sub">&amp; Systems</text>
+
+                                <text x="215" y="312" text-anchor="middle" class="lbl">AI</text>
+                                <text x="215" y="331" text-anchor="middle" class="sub">&amp; Machine Learning</text>
+
+                                <text x="485" y="312" text-anchor="middle" class="lbl">Optimization</text>
+                                <text x="485" y="331" text-anchor="middle" class="sub">&amp; OR</text>
+
+                                <text x="350" y="448" text-anchor="middle" class="lbl">Transportation Safety</text>
+                                <text x="350" y="466" text-anchor="middle" class="sub">&amp; Mobility</text>
+
+                            </svg>
+                        </div>
+
+
+
+
+                    </div>
+
+                    <div class="card profile">
+                        <!-- Replace this block with an actual image:
+                             <img src="headshot.jpg" alt="Raef Abdallah" style="width:100%;height:auto;border-radius:14px;border:1px solid var(--line);" />
+                        -->
+                        <!--<div class="avatar" aria-label="Headshot">
+                          <img src="ou_original.jpg" alt="Headshot of Raef Abdallah">
+                        </div>-->
+
+                        <div class="avatar  hotspot-wrap" id="headshotWrap" aria-label="Headshot" title="Click to enlarge">
+                            <img src="ou_original.jpg" alt="Headshot of Raef Abdallah" id="headshotImg">
+
+                            <!-- Dog 1 hotspot -->
+                            <span class="hotspot" style="top:50%; left:5%; width:35%; height:40%;" data-name="Tanner"></span>
+
+                            <!-- Human hotspot -->
+                            <span class="hotspot" style="top:18%; left:40%; width:40%; height:40%;" data-name="Raef"></span>
+
+                            <span class="hotspot" style="top:65%; left:45%; width:40%; height:10%;" data-name="Raef"></span>
+
+                            <!-- Dog 2 (NEW) -->
+                            <span class="hotspot-left"
+                                  style="top:85%; left:45%; width:40%; height:35%;"
+                                  data-name="Sandy"></span>
+
+                            <!-- Dog hotspot -->
+
+                        </div>
+
+
+
+                        <div>
+                            <small>Based in</small>
+                            <strong>Detroit, Michigan (USA)</strong>
+                        </div>
+
+                        <div class="kv" aria-label="Key facts">
+                            <div class="row"><span>Primary focus</span><strong>Urban Safety & Intelligent Emergency Response</strong></div>
+                            <div class="row"><span>Methods</span><strong>Optimization, ML, Algorithms</strong></div>
+                            <div class="row"><span>Domain</span><strong>Transportation systems</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="highlights" aria-label="Highlights">
+                   <div class="stat">
+                     <div class="num">X+</div>
+                     <div class="lbl">Publications</div>
+                   </div>
+                   <div class="stat">
+                     <div class="num">X+</div>
+                     <div class="lbl">Years industry experience</div>
+                   </div>
+                   <div class="stat">
+                     <div class="num">X</div>
+                     <div class="lbl">Research systems / projects</div>
+                   </div>
+                   <div class="stat">
+                     <div class="num">X</div>
+                     <div class="lbl">Awards / patents (optional)</div>
+                   </div>
+                 </div>-->
+            </div>
+        </section>
+
+        <!-- EDUCATION -->
+        <section id="education">
+            <div class="container">
+                <h2 class="section-title">Education</h2>
+                <!--<p class="section-subtitle">A concise academic timeline.</p>-->
+
+                <div class="card">
+                    <div class="item">
+                        <p class="edu-degree">Ph.D. in Computer Science  <img src="Wayne.png" alt="Wayne State University" class="edu-logo-inline"></p>
+                        <p class="meta">Wayne State University • Detroit, Michigan</p>
+                        <p class="desc">Dissertation: <em>Advancing Road Safety Through Software-Defined Vehicles</em>.</p>
+                    </div>
+
+                    <div class="item">
+                        <p class="edu-degree">M.S. in Industrial Engineering & Management <img src="osu.png" alt="Oklahoma State University" class="edu-logo-inline"></p>
+                        <p class="meta">Oklahoma State University • Stillwater, Oklahoma</p>
+                    </div>
+
+                    <div class="item">
+                        <p class="edu-degree">M.S. in Computer Science <img src="osu.png" alt="Oklahoma State University" class="edu-logo-inline"></p>
+                        <p class="meta">Oklahoma State University • Stillwater, Oklahoma</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TEACHING -->
+        <section id="teaching">
+            <div class="container">
+                <h2 class="section-title">Teaching</h2>
+                <p class="section-subtitle">Courses and teaching approach.</p>
+
+                <div class="grid-2">
+                    <div class="card">
+                        <h3 style="margin:0 0 10px 0; font-size:16px; letter-spacing:.2px;">Courses Taught</h3>
+
+                        <div class="item">
+                            <p class="title">Java Programming — Undergrad</p>
+                            <p class="meta school">
+                                <span>Wayne State University</span>
+                                <img src="Wayne.png" alt="Wayne State University" class="school-logo">
+                            </p>
+                        </div>
+
+                        <div class="item">
+                            <p class="title">Quality and Reliability Engineering — Undergrad/Grad</p>
+                            <p class="meta school">
+                                <span>University of Oklahoma</span>
+                                <img src="ou1.png" alt="University of Oklahoma" class="school-logo">
+                            </p>
+                        </div>
+
+                        <div class="item">
+                            <p class="title">Advanced Object Oriented Programming — Grad</p>
+                            <p class="meta school">
+                                <span>Oklahoma City University</span>
+                                <img src="ocu.png" alt="Oklahoma City University" class="school-logo ocu-logo">
+                            </p>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="card">
+                        <h3 style="margin:0 0 10px 0; font-size:16px; letter-spacing:.2px;">Teaching Approach</h3>
+                        <p style="margin:0; color:var(--muted);">
+                            I emphasize clear problem formulation, practical implementation, and evidence-based evaluation.
+                            Students learn concepts through applied examples, structured feedback, and project-based work that
+                            connects theory to real systems.
+                        </p>
+
+                        <div style="height:14px"></div>
+
+
+                    </div>
+
+                </div>
+        </section>
+
+        <!-- PUBLICATIONS -->
+        <section id="publications">
+            <div class="container">
+                <h2 class="section-title">Selected Publications</h2>
+
+                <p class="section-subtitle pub-header">
+                    <span>For a complete list, see</span>
+                    <a href="https://scholar.google.com/citations?user=zvGDhgMAAAAJ&hl=en&oi=ao"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       title="Google Scholar"
+                       class="scholar-link">
+                        <img src="google_scholar.png" alt="Google Scholar">
+                    </a>
+                </p>
+
+
+                <div class="card">
+                    <!-- Publication 1 -->
+                    <div class="pub">
+                        <p class="ptitle">
+                            <span class="link">Leveraging real-time and historical data for optimal ambulance allocation</span>
+                        </p>
+                        <p class="pauth"><strong>Raef Abdallah</strong>, Weisong Shi</p>
+                        <p class="pmeta"><em> 9th Conference on Models and Technologies for Intelligent Transportation Systems (MT-ITS), IEEE, Luxembourg City, Luxembourg</em> • 2025</p>
+                        <div class="chips">
+                            <!--<a class="chip accent" href="#" target="_blank" rel="noopener noreferrer">PDF</a>
+                            <a class="chip" href="#" target="_blank" rel="noopener noreferrer">DOI</a>
+                            <a class="chip" href="#" target="_blank" rel="noopener noreferrer">BibTeX</a>-->
+                        </div>
+                    </div>
+
+                    <!-- Publication 2 -->
+                    <div class="pub">
+                        <p class="ptitle">
+                            <span class="link"> Enhancing Intersection Safety: A Fusion of Historical and Real-Time Data For Route Planning</span>
+                        </p>
+                        <p class="pauth"><strong>Raef Abdallah</strong>, Prabhjot Kaur, Weisong Shi</p>
+                        <p class="pmeta"><em> Proceedings of the Second IEEE International Conference on Mobility: Operations, Services, and Technologies (MOST), Dallas, TX</em> • 2024</p>
+                        <div class="chips">
+                            <!--<a class="chip accent" href="#" target="_blank" rel="noopener noreferrer">PDF</a>
+                            <a class="chip" href="#" target="_blank" rel="noopener noreferrer">DOI</a>
+                            <a class="chip" href="#" target="_blank" rel="noopener noreferrer">BibTeX</a>-->
+                        </div>
+                    </div>
+
+                    <!-- Publication 3 -->
+                    <div class="pub">
+                        <p class="ptitle">
+                            <span class="link">Real-Time Vehicle Localization Using Steering Wheel Angle in Urban Cities</span>
+                        </p>
+                        <p class="pauth"><strong>Raef Abdallah</strong>, Baofu Wu, Jian Wan</p>
+                        <p class="pmeta"><em> Proceedings of the First IEEE International Conference on Mobility: Operations, Services, and Technologies (MOST), Detroit, MI</em> • 2023</p>
+                        <div class="chips">
+                            <!--<a class="chip accent" href="#" target="_blank" rel="noopener noreferrer">PDF</a>
+                            <a class="chip" href="#" target="_blank" rel="noopener noreferrer">DOI</a>
+                            <a class="chip" href="#" target="_blank" rel="noopener noreferrer">BibTeX</a>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Patents -->
+        <section id="patents" class="section">
+            <div class="container">
+                <h2>Patents</h2>
+
+                <div class="card">
+                    <h3>
+                        <a href="https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/20260080776"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="patent-link">
+                            Method for Alerting Drivers of Elevational Barriers
+                        </a>
+                    </h3>
+
+
+                    <p class="patent-authors">
+                        <strong>Inventors:</strong> Raef Abdallah, Weisong Shi
+                    </p>
+
+                    <p>
+                        U.S. Patent Application No. 18/887,337, filed Sep. 2024
+                        <span>
+                            (Has been examined and is allowed for issuance as a patent).
+                        </span>
+                    </p>
+
+                    <p class="muted">
+                        This patent application focuses on alerting drivers about low-clearance
+                        overpasses and other elevational barriers to help reduce collision risk.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact">
+            <div class="container">
+                <h2 class="section-title">Contact</h2>
+                <p class="section-subtitle">Open to research collaborations.</p>
+
+                <div class="contact-grid">
+                    <div class="card">
+                        <h3 style="margin:0 0 10px 0; font-size:16px; letter-spacing:.2px;">Get in touch</h3>
+                        <p style="margin:0; color:var(--muted);">
+                            Email is the fastest way to reach me. You can also find my publications and professional profile below.
+                        </p>
+
+                        <div style="height:14px"></div>
+
+                        <div class="contact-list">
+                            <a class="contact-link" href="mailto:raef@wayne.edu">
+                                Email <span>raef@wayne.edu</span>
+                            </a>
+
+                            <!-- Replace with your actual Google Scholar link -->
+                            <a class="contact-link" href="https://scholar.google.com/citations?user=zvGDhgMAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener noreferrer">
+                                Google Scholar <span>Publications & citations</span>
+                            </a>
+
+                            <!-- Replace with your LinkedIn link -->
+                            <a class="contact-link" href="https://www.linkedin.com/in/raef-a-3955971/" target="_blank" rel="noopener noreferrer">
+                                LinkedIn <span>Professional profile</span>
+                            </a>
+
+                            <!--
+                            <a class="contact-link" href="https://github.com/" target="_blank" rel="noopener noreferrer">
+                              GitHub <span>Code & projects</span>
+                            </a>-->
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="margin:0 0 10px 0; font-size:16px; letter-spacing:.2px;">Quick links</h3>
+                        <ul style="margin:0; padding-left: 18px; color:var(--muted);">
+                            <!--<li><a class="link" href="default_old_site.html" target="_blank" rel="noopener noreferrer">Old Site</a></li>-->
+                            <li><a class="link" href="#publications">Selected publications</a></li>
+                            <li><a class="link" href="#teaching">Teaching</a></li>
+                        </ul>
+
+                        <div style="height:14px"></div>
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <footer>
+                <div class="footer-inner">
+                    <div>© <span id="year"></span> Raef Abdallah</div>
+                    <div>Last updated <span id="updated"></span></div>
+                </div>
+            </footer>
+        </div>
+    </main>
+
+    <script>// ===== Mobile menu toggle =====
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger?.addEventListener('click', () => {
+      const open = mobileMenu.style.display === 'block';
+      mobileMenu.style.display = open ? 'none' : 'block';
+      hamburger.setAttribute('aria-expanded', String(!open));
+    });
+
+    // Close mobile menu after click
+    mobileMenu?.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        mobileMenu.style.display = 'none';
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // ===== Active nav on scroll =====
+const sections = Array.from(document.querySelectorAll('section[id]'));
+const navLinks = document.querySelectorAll('[data-nav]');
+
+
+function setActive(id){
+  navLinks.forEach(a => a.classList.toggle('active', a.dataset.nav === id));
+}
+
+function onScroll(){
+  const offset = 80; // sticky header height (adjust if needed)
+  let current = sections[0]?.id;
+
+  // If we're at the very bottom, force the last section active (Contact)
+  const nearBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 2);
+  if (nearBottom) {
+    setActive(sections[sections.length - 1].id);
+    return;
+  }
+
+  for (const section of sections) {
+    const top = section.getBoundingClientRect().top;
+    if (top - offset <= 0) current = section.id;
+    else break;
+  }
+
+  setActive(current);
+}
+
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+
+// ===== CV popup =====
+const cvBtn = document.getElementById('cvBtn');
+const cvModal = document.getElementById('cvModal');
+const cvClose = document.getElementById('cvClose');
+
+cvBtn.addEventListener('click', () => {
+  cvModal.classList.add('show');
+});
+
+cvClose.addEventListener('click', () => {
+  cvModal.classList.remove('show');
+});
+
+cvModal.addEventListener('click', (e) => {
+  if(e.target === cvModal){
+    cvModal.classList.remove('show');
+  }
+});
+
+// ===== Theme toggle with dynamic icon =====
+const root = document.documentElement;
+const themeToggle = document.getElementById('themeToggle');
+const moonIcon = document.getElementById('moonIcon');
+const sunIcon = document.getElementById('sunIcon');
+
+function updateIcon(theme){
+  if(theme === 'dark'){
+    moonIcon.style.display = 'none';
+    sunIcon.style.display = 'block';
+  } else {
+    moonIcon.style.display = 'block';
+    sunIcon.style.display = 'none';
+  }
+}
+
+function applyTheme(theme){
+  if(theme === 'dark'){
+    root.setAttribute('data-theme','dark');
+  } else {
+    root.removeAttribute('data-theme');
+  }
+  updateIcon(theme);
+}
+
+function getPreferredTheme(){
+  const saved = localStorage.getItem('theme');
+  if(saved) return saved;
+
+  //return 'dark'; //force dark theme as default
+
+  return window.matchMedia('(prefers-color-scheme: dark)').matches
+    ? 'dark'
+    : 'light';
+}
+
+// init
+const initialTheme = getPreferredTheme();
+applyTheme(initialTheme);
+
+// toggle
+themeToggle.addEventListener('click', () => {
+  const isDark = root.getAttribute('data-theme') === 'dark';
+  const next = isDark ? 'light' : 'dark';
+  localStorage.setItem('theme', next);
+  applyTheme(next);
+});
+
+
+// ===== Headshot enlarge (guaranteed to bind after DOM loads) =====
+document.addEventListener('DOMContentLoaded', () => {
+  const headshotWrap = document.getElementById('headshotWrap');
+  const imgModal = document.getElementById('imgModal');
+  const imgModalClose = document.getElementById('imgModalClose');
+
+  if(!headshotWrap || !imgModal || !imgModalClose){
+    console.warn('Headshot modal: missing elements', { headshotWrap, imgModal, imgModalClose });
+    return;
+  }
+
+  const open = () => {
+    imgModal.classList.add('show');
+    imgModal.setAttribute('aria-hidden', 'false');
+  };
+
+  const close = () => {
+    imgModal.classList.remove('show');
+    imgModal.setAttribute('aria-hidden', 'true');
+  };
+
+  headshotWrap.addEventListener('click', open);
+  imgModalClose.addEventListener('click', close);
+
+  // click outside the box closes
+  imgModal.addEventListener('click', (e) => {
+    if(e.target === imgModal) close();
+  });
+
+  // Esc closes
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') close();
+  });
+});
+
+
+const toggleBtn = document.getElementById('themeToggle');
+toggleBtn.classList.add('theme-hint');
+
+
+
+
+    // ===== Footer dates =====
+    const today_date = new Date();
+    const y = new Date("2026-02-02");
+    document.getElementById('year').textContent = String(today_date.getFullYear());
+
+    // Change this if you want a fixed "last updated" string
+    const updated = y.toLocaleString(undefined, { year:'numeric', month:'short' });
+    document.getElementById('updated').textContent = updated;</script>
+
+    <!-- Headshot Modal -->
+    <div class="img-modal" id="imgModal" aria-hidden="true">
+        <div class="img-modal-box" role="dialog" aria-label="Enlarged headshot">
+            <button class="img-modal-close" id="imgModalClose" aria-label="Close" type="button">×</button>
+            <img src="ou_original.jpg" alt="Headshot of Raef Abdallah" id="imgModalImg">
+        </div>
+    </div>
+
+</body>
+</html>
